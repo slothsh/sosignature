@@ -16,7 +16,7 @@ For version info:
 sosig -v
 ```
 
-For help::w
+For help:
 
 ```bash
 sosig -h
@@ -24,7 +24,7 @@ sosig -h
 
 ### License
 
-MIT Standard license
+[MIT license](https://mit-license.org/)
 
 ___
 
