@@ -6,9 +6,10 @@
 #include <exception>
 
 constexpr int MAJ_VER = 1;
-constexpr int MIN_VER = 0;
-constexpr int SUB_VER = 0;
-constexpr std::string_view BUILD_DATE{ "16-feb-2022" };
+constexpr int MIN_VER = 1;
+constexpr int SUB_VER = 1;
+constexpr std::string_view BUILD_DATE{ "17-feb-2022" };
+constexpr std::string_view BUILD_YEAR{ "2022" };
 
 template<typename T, std::size_t N>
 constexpr std::size_t length(const T (&)[N])
@@ -47,11 +48,15 @@ inline void version_info()
 {
     fmt::print(
         "version: {}.{}.{}\n"
-        "built on: {}\n\n"
+        "built on: {}\n"
+        "Copyright {} (C) Stefan Oliver\n"
+        "MIT License: <https://mit-license.org/>\n"
+        "This is free software: you are free to change and redistribute it.\n"
+        "There is NO WARRANTY, to the extent permitted by law.\n\n"
         "{}\n\n"
-        "Stefan Olivier Signature\n"
-        "Always be kind\n",
-        MAJ_VER, MIN_VER, SUB_VER, BUILD_DATE, reinterpret_cast<const char*>(SIGNATURE.data())
+        "Written by Stefan Olivier\n"
+        "<https://stefanolivier.com>\n",
+        MAJ_VER, MIN_VER, SUB_VER, BUILD_DATE, BUILD_YEAR, reinterpret_cast<const char*>(SIGNATURE.data())
     );
 
     return;
