@@ -1,13 +1,9 @@
 #include <fmt/core.h>
-#include <fmt/format.h>
 #include <cxxopts.hpp>
-#include <stdlib.h>
 #include <string>
 #include <string_view>
-#include <utility>
 #include <cstdint>
 #include <exception>
-#include <locale>
 
 constexpr int MAJ_VER = 1;
 constexpr int MIN_VER = 0;
@@ -20,18 +16,30 @@ constexpr std::size_t length(const T (&)[N])
     return N;
 }
 
-constexpr char SIGNATURE[] = {
-    "+++++++ STEFAN OLIVIER +++++++\n"
-    "++++ Friendly ++++++++++++++++\n"
-    "+++++++ Neighbourhood ++++++++\n"
-    "+++++++++++++ Sloth ++++++++++"
+constexpr std::u8string_view SIGNATURE {
+  u8"⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⠿⠿⠿⠻⠿⢿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
+    "⣿⣿⣿⣿⣿⣿⡿⠟⠉⠈⠉⠉⠄⢠⠄⠄⢀⠄⠄⡬⠛⢿⢿⣿⣿⣿⣿⣿⣿⣿\n"
+    "⣿⣿⣿⡿⡿⠉⠄⠄⠄⠄⠄⠄⠅⠄⠅⠄⠐⠄⠄⠄⠁⠤⠄⠛⢿⢿⣿⣿⣿⣿\n"
+    "⣿⣿⣿⠍⠄⠄⠄⠄⠄⠄⠄⠄⣀⣀⠄⣀⣠⣀⠄⢈⣑⣢⣤⡄⠔⠫⢻⣿⣿⣿\n"
+    "⣿⡏⠂⠄⠄⢀⣠⣤⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣮⣔⠂⡙⣿⣿\n"
+    "⡿⠄⠄⣠⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣈⣿\n"
+    "⠇⠄⢠⣿⣿⣿⣿⣿⡿⠿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠿⠿⢿⡿⣿⣿⣿⣿⣿⡧⣼\n"
+    "⠄⠄⠽⠿⠟⠋⠁⠙⠄⢠⣿⡿⢿⣿⣿⣿⣿⣿⣷⡠⢌⣧⠄⠈⠛⠉⠛⠐⡋⢹\n"
+    "⠄⠄⠄⠄⠄⠄⠄⢀⣠⣾⡿⠑⠚⠋⠛⠛⠻⢿⣿⣿⣶⣤⡄⢀⣀⣀⡀⠈⠄⢸\n"
+    "⣄⠄⠄⠄⢰⣾⠟⠋⠛⠛⠂⠄⠄⠄⠄⠒⠂⠛⡿⢟⠻⠃⠄⢼⣿⣿⣷⠤⠁⢸\n"
+    "⣿⡄⠄⢀⢝⢓⠄⠄⠄⠄⠄⠄⠄⠄⠠⠠⠶⢺⣿⣯⣵⣦⣴⣿⣿⣿⣿⡏⠄⢸\n"
+    "⣿⣿⡀⠄⠈⠄⠄⠄⠠⢾⣷⣄⢄⣀⡈⡀⠠⣾⣿⣿⣿⣿⣿⣿⣿⡿⠿⢏⣀⣾\n"
+    "⣿⣿⣷⣄⠄⠄⠄⢀⠈⠈⠙⠑⠗⠙⠙⠛⠄⠈⠹⠻⢿⡻⣿⠿⢿⣝⡑⢫⣾⣿\n"
+    "⣿⣿⣿⣿⣿⣆⡀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠑⠐⠚⣨⣤⣾⣿⣿\n"
+    "⣿⣿⣿⣿⣿⣿⣿ STEFAN OLIVIER ⣿⣿⣿⣿⣿⣿⣿\n"
+    "⣿⣿⣿⣿ Friendly ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
+    "⣿⣿⣿⣿⣿⣿⣿ Neighbourhood ⣿⣿⣿⣿⣿⣿⣿⣿\n"
+    "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ Sloth ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿"
 };
-
-constexpr std::size_t SIGNATURE_SIZE{ length(SIGNATURE) };
 
 inline void signature()
 {
-    fmt::print("\n{}\n\n", SIGNATURE);
+    fmt::print("\n{}\n\n", reinterpret_cast<const char*>(SIGNATURE.data()));
     return;
 }
 
@@ -43,7 +51,7 @@ inline void version_info()
         "{}\n\n"
         "Stefan Olivier Signature\n"
         "Always be kind\n",
-        MAJ_VER, MIN_VER, SUB_VER, BUILD_DATE, SIGNATURE
+        MAJ_VER, MIN_VER, SUB_VER, BUILD_DATE, reinterpret_cast<const char*>(SIGNATURE.data())
     );
 
     return;
