@@ -22,6 +22,16 @@ For help:
 sosig -h
 ```
 
+### Dependencies
+
+[fmtlib/fmt](https://github.com/fmtlib/fmt.git)
+[jarro2783/cxxopts](https://github.com/jarro2783/cxxopts):
+
+```bash
+git clone https://github.com/fmtlib/fmt.git
+git clone https://github.com/jarro2783/cxxopts.git
+```
+
 ### License
 
 [MIT license](https://mit-license.org/)
