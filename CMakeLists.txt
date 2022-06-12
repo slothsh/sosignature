@@ -1,8 +1,22 @@
 cmake_minimum_required(VERSION 3.15.0)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(osig VERSION 1.0.0 LANGUAGES CXX)
 
-project(sosig VERSION 1.0.0 LANGUAGES CXX)
+# Global compiler configuration
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(COMPILE_WARNINGS "/W4")
+set(COMPILE_OPTIMIZE "/O2")
+set(LINK_RUNTIME_LIB "/MT")
+message(STATUS "Project source path: ${CMAKE_SOURCE_DIR}")
+
+# Comiler Warnings & Run time library
+if (MSVC)
+    message(STATUS "Setting compiler warnings to ${COMPILE_WARNINGS}")
+    message(STATUS "Setting compiler optimizations to ${COMPILE_OPTIMIZE}")
+    message(STATUS "Linking MSVC run time library to ${LINK_RUNTIME_LIB}")
+    add_compile_options(${LINK_RUNTIME_LIB} ${COMPILE_WARNINGS})
+endif()
+
 
 # Third-party dependencies
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
@@ -31,11 +45,11 @@ include_directories(
 )
 
 # Build application
-add_executable(sosig)
-target_sources(sosig PUBLIC ./src/sosignature.cxx)
-set_target_properties(sosig PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(sosig PRIVATE ${LIBFMT})
+add_executable(sloth)
+target_sources(sloth PUBLIC ./src/sloth.cxx)
+set_target_properties(sloth PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(sloth PRIVATE ${LIBFMT})
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-    target_compile_options(sosig PRIVATE "/utf-8")
+    target_compile_options(sloth PRIVATE "/utf-8")
 endif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")

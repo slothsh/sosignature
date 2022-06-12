@@ -5,19 +5,20 @@
 #include <cstdint>
 #include <exception>
 
-constexpr int MAJ_VER = 1;
-constexpr int MIN_VER = 1;
-constexpr int SUB_VER = 1;
-constexpr std::string_view BUILD_DATE{ "17-feb-2022" };
-constexpr std::string_view BUILD_YEAR{ "2022" };
+static constexpr int MAJ_VER = 1;
+static constexpr int MIN_VER = 2;
+static constexpr int SUB_VER = 0;
+static constexpr std::string_view BUILD_DATE{ "17-feb-2022" };
+static constexpr std::string_view BUILD_YEAR{ "2022" };
+static constexpr std::string_view EXE_NAME{ "sloth" };
 
 template<typename T, std::size_t N>
-constexpr std::size_t length(const T (&)[N])
+static constexpr std::size_t length(const T (&)[N])
 {
     return N;
 }
 
-constexpr std::string_view SIGNATURE {
+static constexpr std::string_view SIGNATURE {
      "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⠿⠿⠿⠻⠿⢿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
      "⣿⣿⣿⣿⣿⣿⡿⠟⠉⠈⠉⠉⠄⢠⠄⠄⢀⠄⠄⡬⠛⢿⢿⣿⣿⣿⣿⣿⣿⣿\n"
      "⣿⣿⣿⡿⡿⠉⠄⠄⠄⠄⠄⠄⠅⠄⠅⠄⠐⠄⠄⠄⠁⠤⠄⠛⢿⢿⣿⣿⣿⣿\n"
@@ -64,7 +65,7 @@ inline void version_info()
 
 int main(int argc, char** argv)
 {
-    cxxopts::Options opts("Stefan Olivier Signature", "Prints Stefan Olivier's signature terminal art");
+    cxxopts::Options opts(EXE_NAME.data(), "Prints Stefan Olivier's signature terminal art");
     opts.allow_unrecognised_options();
     opts.add_options()
         ("v,version", "Print version info")
