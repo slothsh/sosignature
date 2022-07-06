@@ -65,7 +65,7 @@ inline void version_info()
 
 int main(int argc, char** argv)
 {
-    cxxopts::Options opts(EXE_NAME.data(), "Prints Stefan Olivier's signature terminal art");
+    cxxopts::Options opts(EXE_NAME.data(), "Prints Stefan Olivier's signature terminal art\n");
     opts.allow_unrecognised_options();
     opts.add_options()
         ("v,version", "Print version info")
