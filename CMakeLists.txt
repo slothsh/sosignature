@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15.0)
-project(osig VERSION 1.0.0 LANGUAGES CXX)
+project(slothsig VERSION 1.0.0 LANGUAGES CXX)
 
 # Global compiler configuration
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
