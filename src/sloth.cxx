@@ -7,7 +7,7 @@
 
 static constexpr int MAJ_VER = 1;
 static constexpr int MIN_VER = 2;
-static constexpr int SUB_VER = 0;
+static constexpr int SUB_VER = 1;
 static constexpr std::string_view BUILD_DATE{ "17-feb-2022" };
 static constexpr std::string_view BUILD_YEAR{ "2022" };
 static constexpr std::string_view EXE_NAME{ "sloth" };

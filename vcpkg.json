@@ -1,0 +1,11 @@
+{
+    "name": "sloth",
+    "version-string": "1.2.1",
+    "dependencies": [
+        "fmt",
+        {
+            "name": "cxxopts",
+            "platform": "x64 & static"
+        }
+    ]
+}
